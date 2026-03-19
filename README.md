@@ -1,6 +1,7 @@
 # 🚀 starship_game
 This project is a browser-based mini game developed in JavaScript as part of a university assignment, then refactored and improved as a personal project.
 It uses a modular architecture and a modern development workflow with bundling and dependency management.
+
 --- 
 ### ⚙️ Installation
 
