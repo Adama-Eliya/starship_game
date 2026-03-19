@@ -4,7 +4,7 @@ It uses a modular architecture and a modern development workflow with bundling a
 
 --- 
 
-## ⚙️ Installation
+### ⚙️ Installation
 
 ```
 npm install
@@ -12,33 +12,33 @@ npm install
 
 ---
 
-## ▶️ Run in development mode
+### ▶️ Run in development mode
 
 ```
 npm run dev
 ```
 ---
 
-## 📦 Build the project
+### 📦 Build the project
 
 ```
 npm run build
 ```
 ---
 
-## 🌐 Live demo
+### 🌐 Live demo
 
 
 
 ---
 
-## 📁 Project structure
+### 📁 Project structure
 
 
 
 ---
 
-## 🎯 About
+### 🎯 About
 
 This project helped me understand:
 - module-based JavaScript architecture
