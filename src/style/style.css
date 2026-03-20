@@ -43,3 +43,7 @@ span#score{
   padding : 4px;
   margin : 4px;
 }
+
+canvas {
+  touch-action: none;
+}

@@ -37,7 +37,7 @@ export default class Mobile {
   get deltaY() {
     return this.#deltaY;
   }
-  set deltaY(n) {
+  set deltaY(n) { 
     this.#deltaY = n;
   }
 

@@ -185,4 +185,11 @@ gameOver() {
     alert("perdu")
   },50);
 }
+moveBasketTo(x,y){
+  if (!this.#basket) {
+    return;
+  }
+  this.#basket.x = x - this.#basket.width / 2;
+  this.#basket.y = y - this.#basket.height / 2;
+}
 }
