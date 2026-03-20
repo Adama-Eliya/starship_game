@@ -2,6 +2,9 @@ import Basket from "./Basket";
 import Egg from "./Egg";
 import KeyManager from "./keyManager";
 import Rocket from "./Rocket";
+import collectSoundSrc from "./assets/sounds/collect.mp3";
+import hitSoundSrc from "./assets/sounds/hit.mp3";
+import gameOverSoundSrc from "./assets/sounds/gameover.mp3";
 
 export default class Game {
    static POINT_COLL_OEUF_PANIER = 100;
@@ -28,6 +31,12 @@ export default class Game {
     this.keyManager = new KeyManager();
     this.timer = null;
     this.life = 3;
+    this.collectSound = new Audio(collectSoundSrc);
+    this.hitSound = new Audio(hitSoundSrc);
+    this.gameOverSound = new Audio(gameOverSoundSrc);
+    this.collectSound.volume = 0.3;
+    this.hitSound.volume = 0.5;
+    this.gameOverSound.volume = 0.7;
   }
 
   /** donne accès au canvas correspondant à la zone de jeu */
@@ -45,18 +54,26 @@ export default class Game {
       this.#basket.draw(this.#context);
    }
    
-
     this.#listEgg.forEach((egg) => egg.move(this.#canvas));
     this.#listEgg = this.#listEgg.filter(
       (egg) => {
          if (this.#basket && egg.collisionWith(this.#basket)) {
+            this.collectSound.currentTime = 0;
+            this.collectSound.play();
             this.#score.textContent = parseInt(this.#score.textContent) + Game.POINT_COLL_OEUF_PANIER + "";
          }
          return egg.y < this.#canvas.height - egg.height && this.#basket && !egg.collisionWith(this.#basket);
       } );
    /** filtre des collision avec fusée */
    this.#listRocket.forEach(rocket => {
-      this.#listEgg = this.#listEgg.filter(egg => (rocket.collisionWith(egg)) ? false : true)
+      this.#listEgg = this.#listEgg.filter(egg => { 
+        if (rocket.collisionWith(egg)){
+          this.hitSound.currentTime = 0;
+          this.hitSound.play();
+          return false;
+        }
+        return true;
+      });
    })
 
     this.#listRocket.forEach((rocket) => rocket.move(this.#canvas));
@@ -64,6 +81,8 @@ export default class Game {
       (rocket) => {
          
          if (this.#basket && rocket.collisionWith(this.#basket) ) {
+            this.hitSound.currentTime = 0;
+            this.hitSound.play();
             document.getElementById(`life-${this.life}`).style.display = "none";
             this.life -= 1;
             this.#score.textContent = parseInt(this.#score.textContent) - Game.POINT_COLL_ROCKET_PANIER  + "";
@@ -170,7 +189,7 @@ export default class Game {
     event.preventDefault();
   }
 gameOver() {
-
+  this.gameOverSound.play();
   this.#listEgg = [];
   this.#listRocket = [];
   this.#basket = null;
