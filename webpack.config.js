@@ -57,6 +57,10 @@ module.exports = {
                   outputPath: 'images'
                }
             }
+         },
+         {
+            test: /\.(mp3|wav)$/,
+            type: 'asset/resource'
          }
       ]
    },
